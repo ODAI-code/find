@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOSTFind</title>
+    
+    <!-- Official Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+</head>
+<body>
+    <!-- (Copy Navbar from index.html here) -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">UCC <span>Hostel Finder</span></a>
+        <div class="hamburger">☰</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hostels.html">Find Hostels</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+
+
+
+
+    
+
+    <div style="display: flex; flex-wrap: wrap; padding: 40px 5%; gap: 30px;">
+        <!-- Filters Sidebar -->
+        <aside style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); align-self: flex-start;">
+            <h3>Filters</h3>
+            <div class="form-group" style="margin-top:20px;">
+                <label>Search Name</label>
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="handleSearch()">
+            </div>
+            
+            <div class="form-group">
+                <label>Location</label>
+                <select style="width:100%; padding:10px; border:1px solid #ddd;" onchange="filterByLocation(this.value)">
+                    <option value="All">All Locations</option>
+                    <option value="Amamoma">Amamoma</option>
+                    <option value="Kwaprow">Kwaprow</option>
+                    <option value="Apewosika">Apewosika</option>
+                    <option value="Abura">Abura</option>
+                    <option value="Ola">Ola</option>
+                    <option value="North Campus">North Campus</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="window.location.reload()">Reset Filters</button>
+        </aside>
+
+        <!-- Hostels Grid -->
+        <main style="flex: 3; min-width: 300px;">
+            <div class="hostel-grid" id="all-hostels">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- (Copy Footer, Modals & Scripts from index.html here) -->
+    
+    <!-- Scripts -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="js/hostel-data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/payment.js"></script>
+    
+    <script>
+        // Check if URL has a location query param to auto-filter on load
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const loc = params.get('loc');
+            if(loc) {
+                document.querySelector('select').value = loc;
+                filterByLocation(loc);
+            }
+        };
+    </script>
+</body>
+</html>
